@@ -1,0 +1,189 @@
+body {
+    font-family: 'Roboto Mono', monospace;
+    background: #e0f2fe;
+    /* Light blue lab background */
+    color: #0f172a;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-image: radial-gradient(#bae6fd 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+#game-container {
+    background: white;
+    width: 90%;
+    max-width: 700px;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    border: 1px solid #cbd5e1;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 20px;
+}
+
+.stat-box {
+    background: #f8fafc;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #e2e8f0;
+}
+
+.label {
+    font-size: 0.7rem;
+    color: #64748b;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0284c7;
+}
+
+#lab-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: bubble 2s infinite ease-in-out;
+}
+
+@keyframes bubble {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+#question-container {
+    margin-bottom: 40px;
+}
+
+#question-text {
+    font-size: 1.2rem;
+    color: #64748b;
+    margin-bottom: 10px;
+}
+
+#conversion-problem {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #334155;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+#answer-box {
+    min-width: 120px;
+    height: 70px;
+    border: 3px solid #cbd5e1;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #94a3b8;
+    background: #f8fafc;
+    padding: 0 10px;
+}
+
+#options-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.option-btn {
+    background: white;
+    color: #334155;
+    border: 2px solid #e2e8f0;
+    padding: 20px;
+    font-size: 1.8rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
+}
+
+.option-btn:hover {
+    border-color: #0ea5e9;
+    background: #f0f9ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.option-btn.correct {
+    background: #dcfce7;
+    border-color: #22c55e;
+    color: #15803d;
+}
+
+.option-btn.wrong {
+    background: #fee2e2;
+    border-color: #ef4444;
+    color: #b91c1c;
+}
+
+#message-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#message-title {
+    font-size: 2rem;
+    color: #0284c7;
+    margin-bottom: 10px;
+}
+
+#next-btn {
+    background: #0284c7;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.2s;
+    font-family: 'Roboto Mono', monospace;
+}
+
+#next-btn:hover {
+    background: #0369a1;
+}

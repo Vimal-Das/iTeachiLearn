@@ -1,0 +1,213 @@
+/* Ratio Lab Specific Styles */
+:root {
+    --color-a: #ef4444;
+    /* Red for Quantity A */
+    --color-b: #3b82f6;
+    /* Blue for Quantity B */
+    --color-bg: #f8fafc;
+    --color-text: #334155;
+    --color-accent: #8b5cf6;
+}
+
+/* Ratio Lab Specific Styles */
+:root {
+    --color-a: #ef4444;
+    /* Red for Quantity A */
+    --color-b: #3b82f6;
+    /* Blue for Quantity B */
+    --color-bg: #f8fafc;
+    --color-text: #334155;
+    --color-accent: #8b5cf6;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+.ratio-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 5px 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.item-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    min-width: 60px;
+    min-height: 60px;
+    align-items: center;
+}
+
+.item {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.item.type-a {
+    background-color: var(--color-a);
+}
+
+.item.type-b {
+    background-color: var(--color-b);
+}
+
+.item.type-mix {
+    background: linear-gradient(45deg, var(--color-a), var(--color-b));
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.notation-card {
+    background: white;
+    padding: 5px;
+    border-radius: 8px;
+    border: 2px dashed #cbd5e1;
+    min-width: 100px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.draggable {
+    display: inline-block;
+    padding: 5px 10px;
+    background: white;
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
+    border-radius: 6px;
+    cursor: grab;
+    font-weight: bold;
+    margin: 2px;
+    touch-action: none;
+    font-size: 1rem;
+}
+
+.draggable.dragging {
+    opacity: 0.5;
+}
+
+.drop-zone {
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+    border-bottom: 2px solid #94a3b8;
+    margin: 0 2px;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 24px;
+    color: var(--color-text);
+}
+
+.drop-zone.filled {
+    border-bottom: none;
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+.mixer-container {
+    position: relative;
+    width: 120px;
+    height: 140px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 3px solid #cbd5e1;
+    border-radius: 0 0 15px 15px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.liquid {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background: var(--color-accent);
+    transition: height 1s ease, background-color 1s ease;
+    opacity: 0.8;
+}
+
+.quiz-question {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 5px;
+}
+
+.quiz-option {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin: 4px 0;
+    text-align: left;
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.quiz-option:hover {
+    border-color: var(--color-accent);
+    background: #f5f3ff;
+}
+
+.quiz-option.selected {
+    border-color: var(--color-accent);
+    background: #ede9fe;
+}
+
+.feedback {
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 6px;
+    font-weight: bold;
+    display: none;
+    font-size: 0.9rem;
+}
+
+.feedback.correct {
+    background: #dcfce7;
+    color: #166534;
+    display: block;
+}
+
+.feedback.incorrect {
+    background: #fee2e2;
+    color: #991b1b;
+    display: block;
+}
+
+.row-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+}

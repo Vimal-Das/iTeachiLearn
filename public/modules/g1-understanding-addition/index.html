@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Addition</title>
+    <link rel="stylesheet" href="../common/module-styles.css">
+    <style>
+        .apple {
+            width: 50px;
+            height: 50px;
+            background-color: #ef4444;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 5px;
+            position: relative;
+        }
+
+        .apple::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            width: 4px;
+            height: 10px;
+            background-color: #3f6212;
+            transform: translateX(-50%);
+        }
+
+        .plus-sign {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #3b82f6;
+            margin: 0 20px;
+        }
+
+        .equals-sign {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #3b82f6;
+            margin: 0 20px;
+        }
+
+        .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1e293b;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="step-1" class="step-container active">
+            <h1>What is Addition?</h1>
+            <p>Addition is bringing two groups of things together to make a new total.</p>
+            <div class="visual-area">
+                <div class="group-1">
+                    <div class="apple"></div>
+                    <div class="apple"></div>
+                </div>
+                <div class="plus-sign">+</div>
+                <div class="group-2">
+                    <div class="apple"></div>
+                </div>
+            </div>
+            <button class="btn" onclick="nextStep(2)">I Understand!</button>
+        </div>
+
+        <div id="step-2" class="step-container">
+            <h1>Let's Count!</h1>
+            <p>If you have 2 apples and get 1 more, how many do you have?</p>
+            <div class="visual-area">
+                <div class="group-1">
+                    <div class="apple"></div>
+                    <div class="apple"></div>
+                </div>
+                <div class="plus-sign">+</div>
+                <div class="group-2">
+                    <div class="apple"></div>
+                </div>
+                <div class="equals-sign">=</div>
+                <div class="group-result" style="opacity: 0; transition: opacity 1s">
+                    <div class="apple"></div>
+                    <div class="apple"></div>
+                    <div class="apple"></div>
+                </div>
+            </div>
+            <button class="btn" onclick="showResult(this)">Count Them</button>
+            <button class="btn" onclick="nextStep(3)" style="display: none; margin-top: 10px;">Next</button>
+        </div>
+
+        <div id="step-3" class="step-container">
+            <h1>Using Numbers</h1>
+            <p>We can write this using numbers.</p>
+            <div class="visual-area">
+                <div class="number">2</div>
+                <div class="plus-sign">+</div>
+                <div class="number">1</div>
+                <div class="equals-sign">=</div>
+                <div class="number">3</div>
+            </div>
+            <button class="btn" onclick="nextStep(4)">Got it!</button>
+        </div>
+
+        <div id="step-4" class="step-container">
+            <h1>Your Turn</h1>
+            <p>What is 1 + 1?</p>
+            <div class="visual-area">
+                <div class="apple"></div>
+                <div class="plus-sign">+</div>
+                <div class="apple"></div>
+                <div class="equals-sign">=</div>
+                <div id="drop-zone"
+                    style="width: 100px; height: 60px; border: 2px dashed #cbd5e1; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold;">
+                    ?</div>
+            </div>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="btn" onclick="checkAnswer(1)">1</button>
+                <button class="btn" onclick="checkAnswer(2)">2</button>
+                <button class="btn" onclick="checkAnswer(3)">3</button>
+            </div>
+        </div>
+
+        <div id="step-5" class="step-container">
+            <h1>Great Job!</h1>
+            <p>You've learned the basics of addition!</p>
+            <div class="visual-area">
+                <div style="font-size: 5rem;">🎉</div>
+            </div>
+            <button class="btn" onclick="finishModule()">Finish</button>
+        </div>
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+    </div>
+
+    <script src="../common/module-toolkit.js"></script>
+    <script>
+        const toolkit = new ModuleToolkit({
+            totalSteps: 5
+        });
+
+        toolkit.onInit = (data) => {
+            if (data.completedSteps > 0 && !data.isCompleted) {
+                // Resume from last step (simple implementation: just jump to it)
+                // Ideally we'd have logic to show the correct step
+                // For now, let's just start at 1 but update progress bar
+                updateProgress(data.completedSteps);
+            }
+        };
+
+        function updateProgress(step) {
+            const percent = (step / 5) * 100;
+            document.getElementById('progress-fill').style.width = `${percent}%`;
+        }
+
+        function nextStep(stepNumber) {
+            document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
+            document.getElementById(`step-${stepNumber}`).classList.add('active');
+            toolkit.completeStep(stepNumber);
+            updateProgress(stepNumber);
+        }
+
+        function showResult(btn) {
+            document.querySelector('.group-result').style.opacity = '1';
+            btn.style.display = 'none';
+            btn.nextElementSibling.style.display = 'inline-block';
+        }
+
+        function checkAnswer(ans) {
+            if (ans === 2) {
+                document.getElementById('drop-zone').textContent = '2';
+                document.getElementById('drop-zone').style.borderColor = '#22c55e';
+                document.getElementById('drop-zone').style.color = '#22c55e';
+                setTimeout(() => nextStep(5), 1000);
+            } else {
+                document.getElementById('drop-zone').style.borderColor = '#ef4444';
+                setTimeout(() => document.getElementById('drop-zone').style.borderColor = '#cbd5e1', 500);
+            }
+        }
+
+        function finishModule() {
+            toolkit.completeModule();
+        }
+    </script>
+</body>
+
+</html>

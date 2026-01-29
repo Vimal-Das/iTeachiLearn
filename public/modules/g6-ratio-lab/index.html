@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ratio Lab</title>
+    <link rel="stylesheet" href="../common/module-styles.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Section 1: Introduction -->
+        <div id="step-1" class="step-container active">
+            <h1>What is a Ratio?</h1>
+            <p>A ratio compares two quantities. Let's compare <span
+                    style="color: var(--color-a); font-weight: bold;">Red</span> and <span
+                    style="color: var(--color-b); font-weight: bold;">Blue</span>.</p>
+
+            <div class="row-layout">
+                <div class="ratio-container">
+                    <div class="item-group" id="group-a"></div>
+                    <div>:</div>
+                    <div class="item-group" id="group-b"></div>
+                </div>
+
+                <div class="controls" style="flex-direction: column; margin-top: 0; gap: 5px;">
+                    <div class="control-group">
+                        <label style="color: var(--color-a); font-weight: bold; font-size: 0.9rem;">Red</label>
+                        <div>
+                            <button class="btn" onclick="updateCount('a', -1)">-</button>
+                            <span id="count-a" style="margin: 0 5px; font-weight: bold; font-size: 1rem;">0</span>
+                            <button class="btn" onclick="updateCount('a', 1)">+</button>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label style="color: var(--color-b); font-weight: bold; font-size: 0.9rem;">Blue</label>
+                        <div>
+                            <button class="btn" onclick="updateCount('b', -1)">-</button>
+                            <span id="count-b" style="margin: 0 5px; font-weight: bold; font-size: 1rem;">0</span>
+                            <button class="btn" onclick="updateCount('b', 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p id="comparison-text" style="margin-top: 10px;">For every <strong>0</strong> Red, there are
+                <strong>0</strong> Blue.</p>
+
+            <button class="btn" onclick="nextStep(2)" style="margin-top: 10px;">I Understand!</button>
+        </div>
+
+        <!-- Section 2: Notation -->
+        <div id="step-2" class="step-container">
+            <h1>Writing Ratios</h1>
+            <p>Drag numbers to fill <strong>all boxes</strong>.</p>
+            <p>Ratio of <span style="color: #65a30d; font-weight: bold;">3 Lemons</span> to <span
+                    style="color: #9333ea; font-weight: bold;">2 Limes</span>:</p>
+
+            <div class="row-layout" style="gap: 10px; margin-top: 5px;">
+                <div class="visual-area" style="gap: 2px; padding: 5px; min-height: 60px; margin-bottom: 0;">
+                    <div class="item" style="background: #65a30d; width: 24px; height: 24px;"></div>
+                    <div class="item" style="background: #65a30d; width: 24px; height: 24px;"></div>
+                    <div class="item" style="background: #65a30d; width: 24px; height: 24px;"></div>
+                    <div style="width: 5px;"></div>
+                    <div class="item" style="background: #9333ea; width: 24px; height: 24px;"></div>
+                    <div class="item" style="background: #9333ea; width: 24px; height: 24px;"></div>
+                </div>
+
+                <div>
+                    <div class="draggable" draggable="true" ondragstart="drag(event)" id="drag-3">3</div>
+                    <div class="draggable" draggable="true" ondragstart="drag(event)" id="drag-2">2</div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 10px;">
+                <div class="notation-card">
+                    <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" data-expected="3"></div>
+                    to
+                    <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" data-expected="2"></div>
+                </div>
+                <div class="notation-card">
+                    <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" data-expected="3"></div>
+                    :
+                    <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" data-expected="2"></div>
+                </div>
+                <div class="notation-card"
+                    style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" data-expected="3"
+                        style="border-bottom: 2px solid black; margin-bottom: 2px;"></div>
+                    <div class="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)" data-expected="2"></div>
+                </div>
+            </div>
+
+            <p id="notation-progress" style="font-weight: bold; color: #64748b; margin-top: 5px; font-size: 0.9rem;">
+                Forms Completed: 0/3</p>
+            <p id="notation-feedback" class="feedback"></p>
+
+            <button class="btn" id="btn-step-3" onclick="nextStep(3)"
+                style="margin-top: 10px; display: none;">Next</button>
+        </div>
+
+        <!-- Section 3: Equivalent Ratios -->
+        <div id="step-3" class="step-container">
+            <h1>Equivalent Ratios</h1>
+            <p>Scale the recipe! Base: <strong>1</strong> Red + <strong>2</strong> Blue</p>
+
+            <div class="row-layout" style="align-items: flex-start; gap: 15px;">
+                <div class="mixer-container">
+                    <div id="liquid" class="liquid" style="height: 30%; background-color: #8b5cf6;"></div>
+                    <div
+                        style="position: absolute; bottom: 5px; width: 100%; text-align: center; color: white; font-weight: bold; text-shadow: 0 1px 2px rgba(0,0,0,0.5); font-size: 0.9rem;">
+                        <span id="mixer-label">1:2</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+                    <div class="controls"
+                        style="flex-direction: column; margin-top: 0; gap: 5px; align-items: stretch;">
+                        <button class="btn" onclick="scaleRecipe(1)"
+                            style="padding: 5px 10px; font-size: 0.9rem;">Single (1:2)</button>
+                        <button class="btn" onclick="scaleRecipe(2)"
+                            style="padding: 5px 10px; font-size: 0.9rem;">Double (2:4)</button>
+                        <button class="btn" onclick="scaleRecipe(3)"
+                            style="padding: 5px 10px; font-size: 0.9rem;">Triple (3:6)</button>
+                    </div>
+
+                    <div style="padding-top: 5px; border-top: 2px dashed #e2e8f0;">
+                        <p style="margin-bottom: 5px; font-weight: bold; font-size: 0.9rem;">Challenge: 3 : 4 = 9 : ?
+                        </p>
+                        <div style="display: flex; gap: 5px; justify-content: center;">
+                            <input type="number" id="ratio-input"
+                                style="width: 50px; padding: 2px; font-size: 1rem; text-align: center; border: 2px solid #cbd5e1; border-radius: 4px;">
+                            <button class="btn" onclick="checkRatio()" style="padding: 5px 10px;">Check</button>
+                        </div>
+                        <p id="ratio-feedback" class="feedback"></p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn" id="btn-step-4" onclick="nextStep(4)" style="margin-top: 10px; display: none;">Take
+                Quiz</button>
+        </div>
+
+        <!-- Section 4: Quiz -->
+        <div id="step-4" class="step-container">
+            <h1>Test Your Skills</h1>
+
+            <div id="quiz-q1" class="quiz-question">
+                <p><strong>1. Meaning of 5:8?</strong></p>
+                <div class="quiz-option" onclick="selectOption(1, 'a')">For every 5 of type A, there are 8 of type B.
+                </div>
+                <div class="quiz-option" onclick="selectOption(1, 'b')">5 items total, 8 left over.</div>
+                <div class="quiz-option" onclick="selectOption(1, 'c')">5 + 8 = 13.</div>
+            </div>
+
+            <div id="quiz-q2" class="quiz-question" style="display: none;">
+                <p><strong>2. Ratio of PENS to TOTAL?</strong></p>
+                <div style="display: flex; gap: 5px; justify-content: center; margin: 5px 0;">
+                    <span style="font-size: 1.2rem;">✏️✏️✏️✏️✏️✏️</span>
+                    <span style="font-size: 1.2rem;">🖊️🖊️</span>
+                </div>
+                <input type="text" id="q2-input" placeholder="e.g. 1:2"
+                    style="padding: 5px; font-size: 1rem; width: 80px; text-align: center;">
+                <button class="btn" onclick="checkQ2()" style="margin-top: 5px;">Submit</button>
+            </div>
+
+            <div id="quiz-q3" class="quiz-question" style="display: none;">
+                <p><strong>3. Red:Yellow is 3:1. If 6 Red, how much Yellow?</strong></p>
+                <input type="number" id="q3-input" placeholder="?"
+                    style="padding: 5px; font-size: 1rem; width: 80px; text-align: center;">
+                <button class="btn" onclick="checkQ3()" style="margin-top: 5px;">Submit</button>
+            </div>
+
+            <div id="quiz-results" style="display: none;">
+                <h2>Quiz Complete!</h2>
+                <p>Score: <span id="final-score"
+                        style="font-size: 1.5rem; font-weight: bold; color: var(--color-accent);">0</span> / 3</p>
+                <button class="btn" onclick="finishModule()">Finish</button>
+            </div>
+
+            <p id="quiz-feedback" class="feedback"></p>
+        </div>
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+    </div>
+
+    <script src="../common/module-toolkit.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
